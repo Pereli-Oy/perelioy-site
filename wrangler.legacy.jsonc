@@ -1,0 +1,21 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "perelioy-legacy-redirect",
+  "account_id": "0d75b3489fe047880cef0e90b8a43d91",
+  "main": "./src/redirect-legacy.js",
+  "compatibility_date": "2026-10-09",
+  "workers_dev": false,
+  "routes": [
+    {
+      "pattern": "persona.od.ua",
+      "custom_domain": true
+    }
+  ],
+  "observability": {
+    "enabled": true,
+    "traces": {
+      "enabled": true,
+      "head_sampling_rate": 0.01
+    }
+  }
+}

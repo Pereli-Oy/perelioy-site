@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://persona.od.ua',
+  site: 'https://perelioy.com',
   output: 'static',
   i18n: {
     defaultLocale: 'en',

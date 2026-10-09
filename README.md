@@ -1,4 +1,4 @@
-# Persona
+# Pereli Oy
 
 Статичний сайт-портфоліо на Astro. Каталог перенесено зі старого Bitrix-сайту:
 
@@ -42,6 +42,33 @@ npm run preview
 npm run deploy
 ```
 
-Production: [persona.od.ua](https://persona.od.ua)
+Production: [perelioy.com](https://perelioy.com)
+
+Repository: [Pereli-Oy/perelioy-site](https://github.com/Pereli-Oy/perelioy-site)
 
 Cloudflare бере статичні файли з `dist/`. База даних і серверний runtime не використовуються.
+
+Worker `perelioy-site` публікується в акаунті `Pereliyuriy@gmail.com`.
+Його `account_id` зафіксовано у `wrangler.jsonc`, щоб деплой не потрапив в інший акаунт.
+Основна адреса — `https://perelioy.com`; правило Cloudflare перенаправляє
+запити з hostname `www.perelioy.com` на `https://perelioy.com` з тим самим шляхом, кодом 301
+і зберігає параметри запиту.
+
+Для локального OAuth-доступу використовується окремий профіль `pereli-oy`.
+Якщо в середовищі встановлено токен іншого акаунта, приберіть його лише
+з поточної PowerShell-сесії, потім авторизуйте офіційний Wrangler:
+
+```powershell
+Remove-Item Env:CLOUDFLARE_API_TOKEN -ErrorAction SilentlyContinue
+npx wrangler auth create pereli-oy
+# На сторінці Cloudflare виберіть лише акаунт Pereliyuriy@gmail.com.
+npm run build
+npx wrangler deploy --profile pereli-oy
+```
+
+`/sitemap.xml` містить усі сторінки чотирьох мов; `robots.txt` посилається на нього.
+
+`wrangler.legacy.jsonc` і `src/redirect-legacy.js` призначені лише для старого домену:
+окремий Worker `perelioy-legacy-redirect` в попередньому акаунті перенаправляє
+`persona.od.ua` на новий домен, зберігаючи шлях і параметри запиту.
+Цей конфіг слід публікувати після перевірки нового сайту.

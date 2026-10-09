@@ -1,7 +1,8 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "persona-site",
-  "compatibility_date": "2026-07-30",
+  "name": "perelioy-site",
+  "account_id": "c0ca52e19d83fb2d94660954f9a32b34",
+  "compatibility_date": "2026-10-09",
   "workers_dev": true,
   "assets": {
     "directory": "./dist",
@@ -10,8 +11,19 @@
   },
   "routes": [
     {
-      "pattern": "persona.od.ua",
+      "pattern": "perelioy.com",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.perelioy.com",
       "custom_domain": true
     }
-  ]
+  ],
+  "observability": {
+    "enabled": true,
+    "traces": {
+      "enabled": true,
+      "head_sampling_rate": 0.01
+    }
+  }
 }

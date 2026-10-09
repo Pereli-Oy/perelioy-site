@@ -2,6 +2,7 @@
 import BackToTop from '../components/BackToTop.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import { SITE_NAME } from '../site';
 import {
   switchLocalePath,
   t,
@@ -25,13 +26,13 @@ const {
   type = 'website',
 } = Astro.props;
 
-const pageTitle = title ? `${title} — Persona` : t(locale, 'meta.siteTitle');
+const pageTitle = title ? `${title} — ${SITE_NAME}` : t(locale, 'meta.siteTitle');
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL(
   image ?? '/media/covers/1682.webp',
   Astro.site,
 );
-const ogTitle = title ? `${title} — Persona` : t(locale, 'meta.siteTitle');
+const ogTitle = title ? `${title} — ${SITE_NAME}` : t(locale, 'meta.siteTitle');
 const ogDescription = description;
 const ogLocale = t(locale, 'meta.ogLocale');
 const alternates = [
@@ -64,7 +65,8 @@ const alternates = [
       hreflang="x-default"
       href={new URL(switchLocalePath(Astro.url.pathname, 'en'), Astro.site)}
     />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -72,7 +74,7 @@ const alternates = [
       rel="stylesheet"
     />
     <meta property="og:type" content={type} />
-    <meta property="og:site_name" content="Persona" />
+    <meta property="og:site_name" content={SITE_NAME} />
     <meta property="og:locale" content={ogLocale} />
     <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={ogDescription} />
