@@ -48,7 +48,7 @@ Repository: [Pereli-Oy/perelioy-site](https://github.com/Pereli-Oy/perelioy-site
 
 Cloudflare бере статичні файли з `dist/`. База даних і серверний runtime не використовуються.
 
-Worker `perelioy-site` публікується в акаунті `Pereliyuriy@gmail.com`.
+Worker `perelioy-site` публікується в Cloudflare-акаунті брата `Pereli Oy`.
 Його `account_id` зафіксовано у `wrangler.jsonc`, щоб деплой не потрапив в інший акаунт.
 Основна адреса — `https://perelioy.com`; правило Cloudflare перенаправляє
 запити з hostname `www.perelioy.com` на `https://perelioy.com` з тим самим шляхом, кодом 301
@@ -61,7 +61,7 @@ Worker `perelioy-site` публікується в акаунті `Pereliyuriy@g
 ```powershell
 Remove-Item Env:CLOUDFLARE_API_TOKEN -ErrorAction SilentlyContinue
 npx wrangler auth create pereli-oy
-# На сторінці Cloudflare виберіть лише акаунт Pereliyuriy@gmail.com.
+# На сторінці Cloudflare виберіть лише акаунт із доменом perelioy.com.
 npm run build
 npx wrangler deploy --profile pereli-oy
 ```
@@ -72,3 +72,12 @@ npx wrangler deploy --profile pereli-oy
 окремий Worker `perelioy-legacy-redirect` в попередньому акаунті перенаправляє
 `persona.od.ua` на новий домен, зберігаючи шлях і параметри запиту.
 Цей конфіг слід публікувати після перевірки нового сайту.
+
+Міграцію виконано 9 жовтня 2026 року. Перевірено HTTPS, чотири мови,
+каталог, зображення, sitemap, 404 і перенаправлення з HTTP, `www` та старого домену.
+Перенаправлення повертають 301 та зберігають шлях і параметри запиту.
+Доступи обох власників збережено: Owner у GitHub і Super Administrator у Cloudflare.
+
+Попередній Worker `persona-site` збережено в старому акаунті для повернення
+за потреби; основний сайт працює в акаунті брата. Архівні фотографії збережено
+в оригінальному вигляді, включно з нанесеними раніше водяними знаками.
